@@ -95,7 +95,7 @@ class LlamaCPP(CustomLLM):
             )
 
         model_kwargs = {
-            **{"n_ctx": context_window, "verbose": verbose},
+            **{"": context_window, "verbose": verbose},
             **(model_kwargs or {}),  # Override defaults via model_kwargs
         }
 
@@ -151,7 +151,7 @@ class LlamaCPP(CustomLLM):
     def metadata(self) -> LLMMetadata:
         """LLM metadata."""
         return LLMMetadata(
-            context_window=self._model.context_params.n_ctx,
+            context_window=self._model.n_ctx(),
             num_output=self.max_new_tokens,
             model_name=self.model_path,
         )
